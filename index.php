@@ -1,14 +1,18 @@
 <?php
     require 'header.php';
-    require 'oeuvres.php';
+    require 'bdd.php';
+
+    $bdd = connexion();
+    $artworks = $bdd->query('SELECT * FROM oeuvres');
+
 ?>
 <div id="liste-oeuvres">
-    <?php foreach($oeuvres as $oeuvre): ?>
+    <?php foreach($artworks as $artwork): ?>
         <article class="oeuvre">
-            <a href="oeuvre.php?id=<?= $oeuvre['id'] ?>">
-                <img src="<?= $oeuvre['image'] ?>" alt="<?= $oeuvre['titre'] ?>">
-                <h2><?= $oeuvre['titre'] ?></h2>
-                <p class="description"><?= $oeuvre['artiste'] ?></p>
+            <a href="oeuvre.php?id=<?= $artwork['id'] ?>">
+                <img src="<?= $artwork['src_image'] ?>" alt="<?= $artwork['title'] ?>">
+                <h2><?= $artwork['title'] ?></h2>
+                <p class="description"><?= $artwork['artist'] ?></p>
             </a>
         </article>
     <?php endforeach; ?>
